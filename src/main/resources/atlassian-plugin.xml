@@ -1,0 +1,39 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}"
+	name="${project.name}" plugins-version="2">
+	<plugin-info>
+		<description>${project.description}</description>
+		<version>${project.version}</version>
+		<vendor name="${project.organization.name}" url="${project.organization.url}" />
+		<param name="plugin-icon">images/pluginIcon.png</param>
+		<param name="plugin-logo">images/pluginLogo.png</param>
+	</plugin-info>
+
+	<!-- add our i18n resource -->
+	<resource type="i18n" name="i18n" location="reviewercombobox" />
+
+	<!-- add our web resources -->
+	<web-resource key="reviewercombobox-resources" name="reviewercombobox Web Resources">
+		<dependency>com.atlassian.auiplugin:ajs</dependency>
+
+		<resource type="download" name="reviewercombobox.css"
+			location="/css/reviewercombobox.css" />
+		<resource type="download" name="reviewercombobox.js"
+			location="/js/reviewercombobox.js" />
+		<resource type="download" name="images/" location="/images" />
+
+		<context>reviewercombobox</context>
+	</web-resource>
+
+	<!-- import from the product container -->
+	<component-import key="applicationProperties"
+		interface="com.atlassian.sal.api.ApplicationProperties" />
+
+	<customfield-type key="reviewercombofield"
+		name="Combobox with names of reviewer group"
+		class="com.itvision.jira.plugin.customfield.combobox.JiraCustomCombobox">
+		<description>A field filled with names of the reviewer group</description>
+		<resource type="velocity" name="view" location="templates/view-jira.vm" />
+		<resource type="velocity" name="edit" location="templates/edit-jira.vm" />
+		<resource type="velocity" name="xml" location="templates/plugins/fields/xml/xml-basidtext.vm" />
+	</customfield-type>
+</atlassian-plugin>
